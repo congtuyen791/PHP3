@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 return new class extends Migration
 {
@@ -14,13 +15,23 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // unsignedInteger
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
+
+            $table->string('username');
+            $table->timestamp('birthday')->nullable();
+            $table->string('phone');
+            $table->unsignedInteger('role');
+            $table->unsignedInteger('status');
+            $table->unsignedBigInteger('room_id');
+
+
+
+            $table->timestamps();// create_at & update_at
         });
     }
 
