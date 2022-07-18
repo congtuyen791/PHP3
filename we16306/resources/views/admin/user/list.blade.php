@@ -3,7 +3,9 @@
 @section('content-title', 'Quản lý người dùng')
 
 @section('content')
-<button class="btn btn-success">Tạo mới</button>
+<form action="{{route('users.create')}}" method="get">
+    <button class="btn btn-success">Tạo mới</button>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -12,6 +14,7 @@
             <th>Ngày sinh</th>
             <th>Mã nhân viên</th>
             <th>Email</th>
+            <th>avatar</th>
             <th colspan="2" class="text-center">
                 Thao tác
             </th>
@@ -25,6 +28,7 @@
             <td>{{$user->birthday}}</td>
             <td>{{$user->username}}</td>
             <td>{{$user->email}}</td>
+            <td><img src="{{asset($user->avatar)}}" alt=""></td>
             <td class="text-center">
                 <button class="btn btn-warning">Edit</button>
                 
