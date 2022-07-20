@@ -3,9 +3,9 @@
 @section('content-title', 'Quản lý người dùng')
 
 @section('content')
-<form action="{{route('users.create')}}" method="get">
-    <button class="btn btn-success">Tạo mới</button>
-</form>
+<div class="">
+    <a href="{{route('users.create')}}"><button class="btn btn-success">Tạo mới</button></a>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -14,37 +14,39 @@
             <th>Ngày sinh</th>
             <th>Mã nhân viên</th>
             <th>Email</th>
-            <th>avatar</th>
-            <th colspan="2" class="text-center">
-                Thao tác
-            </th>
+            <th>Ảnh</th>
+            <th colspan="2">Thao tác</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($user_list as $user)
+        @foreach ($user_list as $item)
         <tr>
-            <td>{{$user->id}}</td>
-            <td>{{$user->name}}</td>
-            <td>{{$user->birthday}}</td>
-            <td>{{$user->username}}</td>
-            <td>{{$user->email}}</td>
-            <td><img src="{{asset($user->avatar)}}" alt=""></td>
-            <td class="text-center">
-                <button class="btn btn-warning">Edit</button>
-                
-            </td>
-            <td class="text-center">
-                <form action="{{route('users.delete', $user->id)}}" method="post">
+            <td>{{ $item->id }}</td>
+            <td>{{ $item->name }}</td>
+            <td>{{ $item->birthday }}</td>
+            <td>{{ $item->username }}</td>
+            <td>{{ $item->email }}</td>
+            <td><img src="{{asset($item->avatar)}}" width="100px" alt=""></td>
+            <td>
+                <form action="{{ route('users.edit', ['id'=>$item->id]) }}" method="POST">
+                    @csrf
+                    @method('GET')
+                    <button class="btn btn-warning">Chỉnh sửa</button>
+                </form>
+
+                <form action="{{route('users.delete',  $item->id)}}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-danger">Xóa</button>
                 </form>
+
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+
 <div>
-    {{$user_list->links()}}
+    {{ $user_list->links() }}
 </div>
 @endsection

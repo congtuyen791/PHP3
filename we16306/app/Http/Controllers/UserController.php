@@ -11,7 +11,7 @@ class UserController extends Controller
     public function index()
     {
         // $users = User::all();
-        $users = User::select('id', 'name', 'birthday', 'username', 'email')
+        $users = User::select('id', 'name', 'birthday', 'username', 'email', 'avatar')
             ->where('id', '>', '3') // (ten truong, toan tu dk, gia tri)
             // ->where('id', '<=', '7')
             ->paginate(5);
@@ -49,14 +49,16 @@ class UserController extends Controller
     public function create()
     {
         $rooms = Room::select('id', 'name')->get();
-        return view('admin.user.create',
+        return view(
+            'admin.user.create',
             ['rooms' => $rooms]
         );
     }
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $user = new User();
         $user->fill($request->all());
-        if($request->hasFile('avatar')) {
+        if ($request->hasFile('avatar')) {
             // neu avatar co file => true
             $avatar = $request->avatar;
             $avatarName = $avatar->hashName();
@@ -67,6 +69,43 @@ class UserController extends Controller
             $user->avatar = '';
         }
         $user->save();
+        return redirect()->route('users.list');
+    }
+
+    public function edit(User $id)
+    {
+        $rooms = Room::select('id', 'name')->get();
+        return view('admin.user.edit', [
+            // 'rooms'=> $room
+            'user' => $id,
+            'rooms' => $rooms
+
+        ]);
+    }
+    public function update(Request $request)
+    {
+        $user = User::find($request->id);
+        if ($request->hasFile('avatar_up')) {
+            $avatar = $request->avatar_up;
+            $avatarName = $avatar->hashName();
+            $avatarName = $request->username . '_' . $avatarName;
+            $avatar_up = $avatar->storeAs('images/users', $avatarName);
+        } else {
+            $avatar_up = $request->avatar;
+        }
+
+        $user->update([
+            'name' => $request->name,
+            'email'  => $request->email,
+            'password' => $request->password,
+            'username' => $request->username,
+            'birthday' => $request->birthday,
+            'phone' => $request->phone,
+            'avatar' => $avatar_up,
+            'role' => $request->role,
+            'status' => $request->status,
+            'room_id' => $request->room_id,
+        ]);
         return redirect()->route('users.list');
     }
 }

@@ -15,10 +15,10 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::get('/', function () {      
-//     // trả về view resources/views/welcome.blade.php
-//     return view('home');
-// });
+Route::get('/', function () {      
+    // trả về view resources/views/welcome.blade.php
+    return view('home');
+});
 // Route::get('/users/{id}/{name}', function ($userId, $username) {      
 //     // trả về view resources/views/welcome.blade.php
 //     dd($userId, $username);
@@ -115,7 +115,8 @@ Route::prefix('/users')->name('users.')->group(function () {
     Route::delete('/delete/{user}', [UserController::class, 'delete'])->name('delete');
     Route::get('/create', [UserController::class, 'create'])->name('create');
     Route::post('/store', [UserController::class, 'store'])->name('store');
-
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [UserController::class, 'update'])->name('update');
 
 });
 

@@ -50,13 +50,13 @@
         <div class="form-group">
             <label for="">Phòng Ban</label>
             <select name="room_id" class="form-control">
-                 @foreach($rooms as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                @foreach($rooms as $item)
+                <option value="{{$item->id}}">{{$item->name}}</option>
                 @endforeach
             </select>
         </div>
-            <button type="submit" class="btn btn-primary ">Thêm mới</button>
-            <button type="reset" class="btn btn-default">Reset</button>
+        <button type="submit" class="btn btn-primary ">Thêm mới</button>
+        <button type="reset" class="btn btn-default">Nhập lại</button>
     </form>
 
 </div>
