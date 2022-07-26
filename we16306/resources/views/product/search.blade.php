@@ -35,7 +35,7 @@
             <td>
                 <form action="{{ route('products.status', ['product'=>$item->id, $item->status]) }}" method="POST">
                     @csrf
-                    <button class="btn btn-danger">Het hang</button>
+                    <button class="btn btn-primary">Het hang</button>
                 </form>
             </td>
             @endif
@@ -52,8 +52,6 @@
 
     </tbody>
 </table>
-<div>
-    {{ $product_list->links() }}
-</div>
+
 
 @endsection

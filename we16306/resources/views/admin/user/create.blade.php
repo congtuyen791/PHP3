@@ -3,7 +3,13 @@
 @section('content-title', 'Tạo mới người dùng')
 
 @section('content')
-
+    @if($errors->any) 
+        <ul class="text-danger">
+            @foreach($errors->all() as $key)
+                <li>{{$key}}</li>
+            @endforeach
+        </ul>
+    @endif
 <div class="col-lg-12">
     <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">
         @csrf

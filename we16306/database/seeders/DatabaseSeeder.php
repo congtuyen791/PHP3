@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\Position;
+use App\Models\Product;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,7 +25,8 @@ class DatabaseSeeder extends Seeder
         // neu da chay seeder cho Room User thi co the comment vao de k chay lai
         // Room::factory('10')->create();
         // User::factory('10')->create();
-        Position::factory('10')->create();
+        // Position::factory('10')->create();
+        // Product::factory('10')->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

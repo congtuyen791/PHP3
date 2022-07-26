@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -117,6 +119,16 @@ Route::prefix('/users')->name('users.')->group(function () {
     Route::post('/store', [UserController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [UserController::class, 'update'])->name('update');
+
+});
+
+Route::prefix('/products')->name('products.')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('list');
+    Route::delete('/delete/{product}', [ProductController::class, 'delete'])->name('delete');
+    Route::get('/create', [ProductController::class, 'create'])->name('create');
+    Route::post('/store', [ProductController::class, 'store'])->name('store');
+    Route::post('/status/{product}&{status}', [ProductController::class, 'status'])->name('status');
+    Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 });
 

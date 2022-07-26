@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Room;
+use App\Models\Http\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -56,6 +57,17 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|min:6|max:32',
+            'email' => 'required|min:6|max:32|email',
+            'avatar' => 'file',
+            'birthday' => 'required|date',
+            'username' => 'required|min:6|max:12',
+        ]);
+        // nếu không đáp ứng các điieeuf kiện trên thì 
+        // thoát hàm và quay lại form kèm thêm biến báo lỗi (erors)
+
+        // Nếu đáp ứn đc điều kiện thì sẽ chạy tiếp xuống code bên dưới 
         $user = new User();
         $user->fill($request->all());
         if ($request->hasFile('avatar')) {
