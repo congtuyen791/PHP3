@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoomController;
 use App\Models\Product;
+use App\Models\Room;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -17,10 +20,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {      
-    // trả về view resources/views/welcome.blade.php
-    return view('home');
-});
+
 // Route::get('/users/{id}/{name}', function ($userId, $username) {      
 //     // trả về view resources/views/welcome.blade.php
 //     dd($userId, $username);
@@ -110,9 +110,15 @@ Route::get('/', function () {
 // });
 
 
+Route::get('/', function () {      
+    // trả về view resources/views/welcome.blade.php
+    return view('home');
+});
 
-
-Route::prefix('/users')->name('users.')->group(function () {
+Route::prefix('/rooms')->name('rooms.')->group(function () {
+    Route::get('/', [RoomController::class, 'index'])->name('index');
+});
+Route::middleware('admin')->prefix('/users')->name('users.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('list');
     Route::delete('/delete/{user}', [UserController::class, 'delete'])->name('delete');
     Route::get('/create', [UserController::class, 'create'])->name('create');
@@ -131,4 +137,12 @@ Route::prefix('/products')->name('products.')->group(function () {
     Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 });
+Route::middleware('guest')->prefix('/auth')->name('auth.')->group(function () {
+    Route::get('/login', [AuthController::class, 'getLogin'])->name('getLogin');
+    Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
+    Route::get('/register', [AuthController::class, 'getRegister'])->name('getRegister');
+    Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
+    
+});
+Route::get('/auth/logout', [AuthController::class, 'logout']);
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PositionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('test-api', function(){
+    $a = 'TEST API DATA';
+
+    return response()->json([
+        'status' => '200',
+        'data' => $a,
+    ]);
+});
+
+// php artisan route
+Route::resource('positions', PositionController::class);

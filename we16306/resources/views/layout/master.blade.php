@@ -170,7 +170,11 @@
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="/" class="d-block">Alexander Pierce</a>
+          <a href="/" class="d-block">
+            @if(Auth::check())
+              {{ Auth::user()->email }}
+            @endif
+          </a>
         </div>
       </div>
 
@@ -200,6 +204,20 @@
             </a>
             
           </li>
+        </ul>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="{{asset('rooms')}}" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Room
+              </p>
+            </a>
+            
+          </li>
+        </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -208,6 +226,19 @@
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Product
+              </p>
+            </a>
+            
+          </li>
+        </ul>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="{{asset('/auth/logout')}}" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                logout
               </p>
             </a>
             

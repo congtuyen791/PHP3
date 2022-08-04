@@ -24,21 +24,21 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:15',
-            'email' => 'required|email',
-            'phone' => 'required'
+            'email' => 'required|email|min:6|max:32',
+            'password' => 'required|min:6'
         ];
     }
 
     public function messages()
     {
+        // key là key của rule . đk
         return [
-            'name.required' => 'Tên bắt buộc nhập',
-            'name.min' => 'Tên tối thiểu 2 ký tự',
-            'name.max' => 'Tên tối đa 15 ký tự',
             'email.required' => 'Email bắt buộc nhập',
             'email.email' => 'Email phải đúng định dạng',
-            'phone.required' => 'Số điện thoại bắt buộc nhập',
+            'email.min' => 'Email tối thiểu 6 ký tự',
+            'email.max' => 'Email tối đa 32 ký tự',
+            'password.required' => 'Mật khẩu bắt buộc nhập',
+            'password.min' => 'Mật khẩu tối thiểu 6 ký tự'
         ];
     }
 }

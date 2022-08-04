@@ -49,4 +49,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // định nghĩe quan hệ 1 user thuộc 1 position
+    public function room() {
+        return $this->belongsTo(Room::class, 'room_id', 'id');
+    }
 }

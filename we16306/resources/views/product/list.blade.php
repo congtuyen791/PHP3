@@ -13,14 +13,16 @@
 </div>
 <table class="table table-hover">
     <thead class="">
-        <th scope="col">Ten</th>
+        <th scope="col">ID</th>
+        <th scope="col">name</th>
         <th scope="col">Price</th>
-        <th scope="col">avatar</th>
-        <th scope="col">Trang thai</th>
+        <th scope="col">Avatar</th>
+        <th scope="col">Status</th>
     </thead>
     <tbody>
         @foreach ($product_list as $item)
         <tr>
+            <td scope="row">{{ $item['id'] }}</td>
             <td scope="row">{{ $item['name'] }}</td>
             <td scope="row">{{ $item['price'] }}</td>
             <td scope="row"><img src="{{asset($item->thumbnail_url)}}" width="200px" alt=""></td>

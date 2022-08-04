@@ -14,7 +14,9 @@
             <th>Ngày sinh</th>
             <th>Mã nhân viên</th>
             <th>Email</th>
+            <th>phong ban</th>
             <th>Ảnh</th>
+            <th>tuy chinh</th>
             <th colspan="2">Thao tác</th>
         </tr>
     </thead>
@@ -26,6 +28,7 @@
             <td>{{ $item->birthday }}</td>
             <td>{{ $item->username }}</td>
             <td>{{ $item->email }}</td>
+            <td>{{ isset($item->room) ? $item->room->name : '' }}</td>
             <td><img src="{{asset($item->avatar)}}" width="100px" alt=""></td>
             <td>
                 <form action="{{ route('users.edit', ['id'=>$item->id]) }}" method="POST">

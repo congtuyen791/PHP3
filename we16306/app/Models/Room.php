@@ -15,4 +15,17 @@ class Room extends Model
         'status',
         'parent_id',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'room_id', 'id');
+    }
+    public function children()
+    {
+        return $this->hasMany(Room::class, 'parent_id', 'id');
+    }
+
+    public function oneParent(){
+        return $this->belongsTo(Room::class, 'parent_id', 'id');
+    }
 }

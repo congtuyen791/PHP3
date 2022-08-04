@@ -11,9 +11,17 @@ class UserController extends Controller
 {
     public function index()
     {
-        // $users = User::all();
-        $users = User::select('id', 'name', 'birthday', 'username', 'email', 'avatar')
-            ->where('id', '>', '3') // (ten truong, toan tu dk, gia tri)
+        // $users = User::find(25);
+        // $room = $users->room;
+        // dd($users, $room);
+
+        // $room = Room::find(1);
+        // $roomChildren = $room->children;
+        // dd( $room, $roomChildren);
+
+        $users = User::select('id', 'name', 'birthday', 'username', 'email', 'avatar', 'room_id')
+            ->where('id', '>', '3')->orderBy('id', 'desc') // (ten truong, toan tu dk, gia tri)
+            ->with('room') // truy vấn thêm quan hệ trước khi trả kết quả qua view
             // ->where('id', '<=', '7')
             ->paginate(5);
         // ->cursorPaginate(5); truy vấn where id > 5 limit 5
@@ -120,4 +128,5 @@ class UserController extends Controller
         ]);
         return redirect()->route('users.list');
     }
+
 }

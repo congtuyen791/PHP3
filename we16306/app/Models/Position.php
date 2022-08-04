@@ -14,4 +14,6 @@ class Position extends Model
         'name',
         'status',
     ];
+
+
 }
